@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: memcachedadm
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memcachedadm
+  template:
+    metadata:
+      labels:
+        app: memcachedadm
+    spec:
+      containers:
+      - name: memcachedadm
+        image: {{ .Values.deployment.memcachedadmin_image }}
+        ports:
+          - containerPort: {{ .Values.deployment.memcachedcontainerPort }}
+            name: memcachedadm
+      nodeSelector:
+        pool: {{ .Values.deployment.node_selector }}

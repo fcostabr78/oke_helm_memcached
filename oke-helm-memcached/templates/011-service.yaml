@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: 'memcached'
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  clusterIP: None
+  ports:
+  - port: {{ .Values.deployment.servicePort }}
+    protocol: TCP
+    targetPort: port-memcached
+  selector:
+    app: memcached

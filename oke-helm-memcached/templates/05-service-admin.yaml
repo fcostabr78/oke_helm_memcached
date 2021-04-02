@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: 'srv-memcachedadm'
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  type: LoadBalancer
+  ports:
+  - port: {{ .Values.deployment.memcachedservicePort }}
+    protocol: TCP
+    targetPort: memcachedadm
+  selector:
+    app: 'memcachedadm'        

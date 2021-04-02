@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: deploy-mcrouter
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: mcrouter
+  template:
+    metadata:
+      labels:
+        app: mcrouter
+    spec:
+      containers:
+      - name: mcrouter
+        command:
+        - mcrouter
+        args: 
+        - --config-str={"pools":{"A":{"servers":["memcached-0.memcached.{{ .Values.deployment.namespace }}.svc.cluster.local:{{ .Values.deployment.containerPort }}","memcached-1.memcached.{{ .Values.deployment.namespace }}.svc.cluster.local:{{ .Values.deployment.containerPort }}"]}},"route":{"type":"OperationSelectorRoute","operation_policies":{"add":"AllSyncRoute|Pool|A","delete":"AllSyncRoute|Pool|A","get":"RandomRoute|Pool|A","set":"AllSyncRoute|Pool|A"}}}
+        - -p {{ .Values.deployment.mcroutercontainerPort }}
+        image: {{ .Values.deployment.mcrouter_image }}:{{ .Values.deployment.mcrouter_version }}
+        ports:
+          - containerPort: {{ .Values.deployment.mcroutercontainerPort }}
+            name: port-mcrouter
+      nodeSelector:
+        pool: {{ .Values.deployment.node_selector }}

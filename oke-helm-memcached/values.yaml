@@ -1,0 +1,16 @@
+deployment:
+  replicas: 2
+  namespace: memcached
+  image: memcached
+  version: 1.5.10
+  mcrouter_image: devan2502/mcrouter
+  mcrouter_version: latest
+  memcachedadmin_image: jacksoncage/phpmemcachedadmin
+  containerPort: 11211
+  servicePort: 11211
+  mcroutercontainerPort: 5000
+  mcrouterservicePort: 5000
+  memcachedcontainerPort: 80
+  memcachedservicePort: 80
+  node_selector: support_1
+

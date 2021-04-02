@@ -1,0 +1,27 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: 'memcached'
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  serviceName: 'memcached'
+  selector:
+    matchLabels:
+      app: 'memcached'
+  template:
+    metadata:
+      labels:
+        app: 'memcached'
+    spec:
+      containers:
+      - name: memcached
+        command: ["memcached", "-m", "256", "-I", "32m", "-v"]
+        image: {{ .Values.deployment.image }}:{{ .Values.deployment.version }}
+        ports:
+          - containerPort: {{ .Values.deployment.containerPort }}
+            name: port-memcached
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        pool: {{ .Values.deployment.node_selector }}
+       

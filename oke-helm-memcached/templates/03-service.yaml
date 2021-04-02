@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: 'srv-mcrouter'
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  ports:
+  - port: {{ .Values.deployment.mcrouterservicePort }}
+    protocol: TCP
+    targetPort: port-mcrouter
+  selector:
+    app: 'mcrouter'        
