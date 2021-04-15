@@ -1,14 +1,13 @@
 apiVersion: v1
 entries:
   oke-helm-memcached:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2021-04-01T16:36:51.20991556-03:00"
-    description: A Helm chart for Kubernetes
-    digest: a61b32b5e9a2cc8d1b146a2f5173d7110135dde74fc778eb4486557508ad270d
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2021-04-15T00:22:46.819163509-03:00"
+    description: A Helm chart for Deploy Memcached in OKE
+    digest: a157fad0b2a897fc880048d89b3bfa6988843c63b9bed91803cccd1dc96ec1a2
     name: oke-helm-memcached
-    type: application
     urls:
     - oke-helm-memcached-0.1.0.tgz
     version: 0.1.0
-generated: "2021-04-01T16:36:51.208704877-03:00"
+generated: "2021-04-15T00:22:46.81828033-03:00"
